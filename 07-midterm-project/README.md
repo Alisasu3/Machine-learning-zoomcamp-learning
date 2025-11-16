@@ -1,5 +1,5 @@
 # 🩺 Diabetes Probability Prediction – Midterm Project  
-Machine Learning Zoomcamp – Midterm Submission  
+Machine Learning Zoomcamp 2025 – Midterm Submission  
 **Author: Alisa Su**
 
 ---
@@ -8,7 +8,7 @@ Machine Learning Zoomcamp – Midterm Submission
 
 Diabetes is a growing global health concern affecting millions worldwide. Early detection and risk assessment can prevent complications such as cardiovascular disease, kidney failure, neuropathy, and vision loss.
 
-This project predicts the **probability that an individual has diabetes** based on demographic, lifestyle, and medical health indicators.
+This project predicts the probability that an individual has diabetes based on demographic, lifestyle, and medical health indicators.
 
 ### 🎯 Goal
 Build a machine learning model and deployment pipeline that:
@@ -16,7 +16,7 @@ Build a machine learning model and deployment pipeline that:
 - Accepts a person's health attributes  
 - Predicts diabetes probability (`0–1`)  
 - Returns a binary prediction (`diabetes = True/False`)  
-- Can be accessed through a **Flask web service**  
+- Can be accessed through a **Flask web service** 
 - Can be deployed with **Docker**
 
 ### 💡 Use Case
@@ -98,7 +98,7 @@ Hyperparameters tuned:
 - `max_depth`  
 - `min_samples_leaf`
 
-Random Forest delivered the **highest ROC AUC** and became the final model.
+Random Forest delivered the highest ROC AUC and became the final model.
 
 ---
 
@@ -181,17 +181,26 @@ http://localhost:9696/predict
 ```python
 import requests
 
-url = "http://localhost:9696/predict"
+url = 'http://localhost:9696/predict'
 
-patient = {
-    "BMI": 28,
-    "Age": 9,
-    "Smoking": 1,
+people = {
+    "highbp":1,
+    "highchol":0,
+    "cholcheck":1,
+    "bmi":38,
+    "smoker":1,
     ...
 }
 
-response = requests.post(url, json=patient).json()
+
+response = requests.post(url,json=people).json()
 print(response)
+
+
+if response['diabetes'] == True:
+    print('this people has high diabetes risk')
+else:
+    print('this person has low diabetes risk')
 ```
 
 ---
@@ -204,20 +213,20 @@ print(response)
 ├── train.py
 ├── predict.py
 ├── predict_test.py
+├── predict_test.ipynb
+├── Logistic_regression.ipynb
+├── Trees.ipynb
 ├── rf_model.bin
 ├── Dockerfile
 ├── requirements.txt
+├── Pipfile
+├── Pipfile.lock
 └── README.md
 ```
 
 ---
 
-## 11. Video Demo
-*(Insert Loom or YouTube link here)*
-
----
-
-## 12. Conclusion
+## 11. Conclusion
 
 This midterm project demonstrates a complete end-to-end ML pipeline:
 
