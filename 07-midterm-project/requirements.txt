@@ -1,0 +1,6 @@
+numpy==2.1.2
+scikit-learn==1.7.0
+flask
+gunicorn
+
+
