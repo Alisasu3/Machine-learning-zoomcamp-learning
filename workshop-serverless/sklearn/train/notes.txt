@@ -1,0 +1,40 @@
+uv init
+uv add scikit-learn pandas
+uv run python train.py
+
+python invoke.py
+export AWS_DEFAULT_REGION=ap-southeast-2
+
+export AWS_ACCESS_KEY_ID=test
+export AWS_SECRET_ACCESS_KEY=test
+export AWS_DEFAULT_REGION=ap-southeast-2
+
+uv run python invoke.py
+
+homework:
+https://github.com/alexeygrigorev/large-datasets/releases/download/dogs-cats-model/dogs_cats_10_0.687.h5 -O dogs-vs-cats.h5
+
+ipython
+import tensorflow as tf
+from tensorflow import keras
+model = keras.models.load_model('dogs-vs-cats.h5')
+
+tflite_model = converter.convert()
+
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+tflite_model = converter.convert()
+
+with open('clothing-model.tflite','wb') as f_out:
+    f_out.write(tflite_model)
+
+ipython
+import homework
+homework.predict(url)
+
+docker build -t zoomcamp-serverless-homework .
+
+docker image ls -a .
+
+docker run -it --rm -p 8080:8080 zoomcamp-serverless-homework
+
+python ./test.py

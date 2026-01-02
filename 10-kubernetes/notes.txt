@@ -1,0 +1,217 @@
+# wget https://github.com/DataTalksClub/machine-learning-zoomcamp/releases/download/chapter7-model/xception_v4_large_08_0.894.h5 -O clothing-model.h5
+
+ipython
+import tensorflow as tf
+from tensorflow import keras
+# model = keras.models.load_model('./clothing-model.h5', compile=False)
+
+# use my own model
+model = keras.models.load_model('./clothing-model-v2.h5')
+
+# tf.saved_model.save(model,'clothing-model')
+
+model.export("clothing-model")
+
+ls -lhR clothing-model
+tree clothing-model
+saved_model_cli show --dir clothing-model --all
+
+next step: create model-description file
+
+docker run -it --rm \
+  -p 8500:8500 \
+  -p 8501:8501 \
+  -v $(pwd)/clothing-model:/models/clothing-model/1 \
+  -e MODEL_NAME="clothing-model" \
+  tensorflow/serving:2.10.1
+
+jupyter nbconvert --to script tf-serving-connect.ipynb
+
+python gateway.py
+
+debug: change gateway.py file - prepare_request part
+
+docker run -it --rm \
+  -p 8500:8500 \
+  -p 8501:8501 \
+  -v $(pwd)/clothing-model:/models/clothing-model/1 \
+  -e MODEL_NAME="clothing-model" \
+  tensorflow/serving:2.10.1
+
+debug: change gateway.py file - prepare_response part
+
+export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
+python gateway.py
+
+change gateway.py file to include flask
+
+pip install flask
+
+python gateway.py
+
+# open new terminal
+# create test.py
+python test.py
+
+# stop the gateway.py terminal
+pip install pipenv
+
+# fail
+# pipenv install grpcio==1.42.0 flask gunicorn keras-image-helper
+# pipenv install "grpcio>=1.60" flask gunicorn keras-image-helper
+pipenv install --skip-lock "grpcio>=1.60" flask gunicorn keras-image-helper
+
+# fail
+pipenv install tensorflow-protobuf==2.7.0
+
+# create proto.py
+# fail
+pipenv shell
+which python
+python gateway.py
+
+
+
+
+pipenv run pip install --upgrade --force-reinstall "numpy==1.24.3"
+pipenv run pip install --upgrade --force-reinstall "tensorflow-cpu==2.13.0"
+
+
+# 10.4
+docker build -t zoomcamp-10-model:xception-v4-001 \
+  -f image-model.dockerfile .
+
+docker run -it --rm \
+  -p 8500:8500 \
+  zoomcamp-10-model:xception-v4-001
+
+pipenv run python gateway.py
+
+docker build -t zoomcamp-10-gateway:002 \
+  -f image-gateway.dockerfile .
+
+docker run -it --rm \
+  -p 9696:9696 \
+  zoomcamp-10-gateway:001
+
+docker compose up --build
+
+pipenv lock --clear
+
+docker compose up --build gateway
+
+docker compose build --no-cache gateway
+docker compose up gateway
+
+docker compose build clothing-model
+docker compose build gateway
+docker compose up
+
+docker build -t zoomcamp-10-model:xception-v4-001 -f image-model.dockerfile .
+
+docker compose up
+
+docker compose down
+docker compose up -d --build
+
+docker compose down
+
+cd ping
+pipenv install flask gunicorn
+touch Pipfile
+pipenv install flask gunicorn
+
+# create Dockerfile under ping
+docker build -t ping:v001 .
+docker run -it --rm -p 9696:9696 ping:v001
+
+# in a new terminal
+curl localhost:9696/ping
+
+# download kubectl from this link: https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html#linux_amd64_kubectl
+cd ~
+curl -LO "https://s3.us-west-2.amazonaws.com/amazon-eks/1.34.2/2025-11-13/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/kubectl
+
+# download kind from this link: https://kind.sigs.k8s.io/docs/user/quick-start/#installation
+wget https://kind.sigs.k8s.io/dl/v0.31.0/kind-linux-amd64 -O kind
+
+# go to 10-kubernetes -> go to ping folder
+kind create cluster
+kubectl cluster-info --context kind-kind
+kubectl get service
+
+kubectl get pod
+kubectl get deployment
+docker ps
+
+kubectl apply -f deployment.yaml
+kubectl get deployment
+kubectl get pod
+kubectl describe pod
+
+kind load docker-image ping:v001
+kubectl get pod
+kubectl port-forward ping-deployment-5b7c698bc5-7ghq8 9696:9696
+
+# in new terminal 
+curl localhost:9696/ping
+
+kubectl apply -f service.yaml
+kubectl get service
+kubectl get svc
+kubectl port-forward service/ping 8080:80
+
+curl localhost:8080/ping
+
+# 10.7
+kubectl get pod
+kubectl get deployment
+
+kind load docker-image zoomcamp-10-model:xception-v4-001
+
+# go to the right folder that has the yaml file
+kubectl apply -f model-deployment.yaml
+kubectl get pod
+kubectl describe pod tf-serving-clothing-model-797cc7547b-qwdbs 
+
+kubectl apply -f ../ping/deployment.yaml
+kubectl get pod
+kubectl get deployment
+
+kubectl delete -f ../ping/deployment.yaml
+kubectl get pod
+kubectl apply -f ../ping/deployment.yaml
+kubectl get pod
+kubectl port-forward tf-serving-clothing-model-797cc7547b-qwdbs 8500:8500
+
+# fail
+python gateway.py
+
+#workaround
+pipenv --rm
+PIPENV_IGNORE_VIRTUALENVS=1 pipenv install --python 3.9.18
+
+pipenv install flask gunicorn keras-image-helper "grpcio>=1.48.2,<2.0" "tensorflow-serving-api==2.13.0" "protobuf==3.20.3"
+
+pipenv run python -c "import google.protobuf as p; print(p.__version__)"
+
+# run this instead of python gateway.py because python version is different
+pipenv run python gateway.py
+
+kubectl apply -f model-service.yaml
+kubectl get service
+kubectl port-forward service/tf-serving-clothing-model 8500:8500
+
+kind load docker-image zoomcamp-10-gateway:002
+
+kubectl get pod
+
+#
+kubectl exec -it ping-deployment-6f69564d8c-bdjfn -- bash
+curl localhost:9696/ping
+apt install curl
+apt update
+apt install curl
+curl localhost:9696/ping
