@@ -227,3 +227,10 @@ clothing-model/
 # Datasets / large data
 data/
 datasets/
+
+# ML artifacts
+10-kubernetes/clothing-model/
+**/variables/
+**/assets/
+*.h5
+*.keras
