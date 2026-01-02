@@ -205,3 +205,25 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# --- ML artifacts (do not push) ---
+*.h5
+*.keras
+*.ckpt
+*.pb
+*.tflite
+*.onnx
+
+# TensorFlow Serving / SavedModel exports
+saved_model/
+clothing-model/
+10-kubernetes/clothing-model/
+**/variables/
+**/assets/
+**/saved_model.pb
+**/*.data-00000-of-00001
+**/*.index
+
+# Datasets / large data
+data/
+datasets/
