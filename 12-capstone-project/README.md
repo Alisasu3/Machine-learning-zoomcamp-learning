@@ -1,5 +1,6 @@
-## 🍎 Fruit Classifier – Deep Learning Image Classification Project
+# 🍎 Fruit Classifier – Deep Learning Image Classification Project
 
+---
 ## 📌 Problem Description
 
 The objective of this project is to develop an image classification system capable of accurately identifying different types of fruits from images using deep learning techniques.
@@ -167,6 +168,7 @@ This project demonstrates how a well-structured deep learning pipeline, combined
 ## 💬 Feedback
 
 Feedback or suggestions are welcome. Please feel free to reach out.
+
 
 
 
