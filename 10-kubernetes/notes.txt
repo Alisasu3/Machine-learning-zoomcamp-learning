@@ -200,6 +200,7 @@ pipenv run python -c "import google.protobuf as p; print(p.__version__)"
 # run this instead of python gateway.py because python version is different
 pipenv run python gateway.py
 
+
 kubectl apply -f model-service.yaml
 kubectl get service
 kubectl port-forward service/tf-serving-clothing-model 8500:8500
@@ -215,3 +216,53 @@ apt install curl
 apt update
 apt install curl
 curl localhost:9696/ping
+
+# restart all the work
+# recreate kubernetes cluster
+kind delete cluster --name kind || true
+kind create cluster --name kind
+
+kubectl config use-context kind-kind
+kubectl cluster-info
+kubectl get nodes
+
+# find the dockerfile to use in next step
+find . -maxdepth 4 -name Dockerfile -print
+
+# rebuild model docker image
+cd /workspaces/machine-learning-zoomcamp-homework/10-kubernetes/ping
+docker build -t zoomcamp-10-model:xception-v4-001 .
+
+# load it to kind
+kind load docker-image zoomcamp-10-model:xception-v4-001 --name kind
+
+# build,load gateway image
+cd /workspaces/machine-learning-zoomcamp-homework/10-kubernetes/ping
+docker build -t zoomcamp-10-gateway:002 .
+kind load docker-image zoomcamp-10-gateway:002 --name kind
+
+# 
+cd ../kube-config
+
+kubectl apply -f model-deployment.yaml
+kubectl apply -f model-service.yaml
+
+kubectl get pods
+kubectl get svc
+
+# new terminal
+kubectl get pods -w
+
+# new terminal 
+cd /workspaces/machine-learning-zoomcamp-homework/10-kubernetes/ping
+
+pipenv --rm || true
+PIPENV_IGNORE_VIRTUALENVS=1 pipenv install --python 3.9.18
+
+pipenv install flask gunicorn keras-image-helper \
+  "grpcio>=1.48.2,<2.0" \
+  "tensorflow-serving-api==2.13.0" \
+  "protobuf==3.20.3"
+
+pipenv run python gateway.py
+
