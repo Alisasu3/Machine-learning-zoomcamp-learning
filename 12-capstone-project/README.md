@@ -45,9 +45,8 @@ These checks confirm that the observed high model performance is attributable to
 
 ## 🧠 Model Training
 
-All experiments and training steps are implemented in:
-
-fruits_classifier_xception.ipynb
+All experiments and model training steps are implemented in the notebook:  
+[`fruits_classifier_xception.ipynb`](fruits_classifier_xception.ipynb)
 
 Key Training Steps
 1. Pre-trained Convolutional Neural Networks
@@ -105,10 +104,13 @@ Better capture model confidence and stability
 The best-performing model is saved using model checkpoints. A manual test is performed using a randomly selected image from the test dataset, and the model correctly predicts the image as **"Mango"**.
 
 ## 📦 Environment Setup
-1. Create and Activate Virtual Environment
+
+### 1. Create and Activate Virtual Environment
+
 ```bash
 python -m venv venv
-source venv/bin/activate        
+source venv/bin/activate
+      
 
 3. Install Dependencies
 ```bash
@@ -166,3 +168,4 @@ This project demonstrates how a well-structured deep learning pipeline, combined
 ## 💬 Feedback
 
 Feedback or suggestions are welcome. Please feel free to reach out.
+
