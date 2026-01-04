@@ -5,7 +5,7 @@
 The objective of this project is to develop an image classification system capable of accurately identifying different types of fruits from images using deep learning techniques.
 
 The project emphasizes simplicity, correctness, and reproducibility, while showcasing best practices in model training, validation, and deployment.
----
+
 ## 📊 Dataset
 Source
 
@@ -29,7 +29,7 @@ To reduce computational cost and speed up experimentation, only 5 common fruit c
 🍓 Strawberry
 
 This reduced dataset still provides very clear visual patterns, making it suitable for transfer learning experiments.
----
+
 ## 🔍 Exploratory Data Analysis (EDA)
 
 The exploratory data analysis focuses on understanding both the visual characteristics and the structural integrity of the image dataset. Key aspects examined include:
@@ -43,7 +43,7 @@ In addition, data integrity checks were conducted to ensure:
 - No overlap between training and validation datasets
 
 These checks confirm that the observed high model performance is attributable to the inherent simplicity and clarity of the dataset, rather than data leakage or methodological issues.
----
+
 ## 🧠 Model Training
 
 All experiments and model training steps are implemented in the notebook:  
@@ -101,7 +101,7 @@ Instead of relying solely on accuracy, **`val_loss` is used as the primary monit
 ### 7.  Model Saving and Testing
 
 The best-performing model is saved using model checkpoints. A manual test is performed using a randomly selected image from the test dataset, and the model correctly predicts the image as "Mango".
----
+
 ## 📦 Environment Setup
 
 1. Create and Activate Virtual Environment
@@ -123,7 +123,7 @@ curl -X POST http://127.0.0.1:5000/predict \
      -F "file=@../data/fruits/test/Mango/134_100.jpg"
 ```
 <img width="775" height="217" alt="image" src="https://github.com/user-attachments/assets/8d247cd1-4fa3-4885-8966-85d70983c568" />
----
+
 ## 🐳 Containerization (Docker)
 
 The application is fully containerized for easy deployment.
@@ -148,7 +148,7 @@ Predict
   -F "file=@../data/fruits/test/Orange/52_100.jpg"
 ```
 <img width="763" height="217" alt="image" src="https://github.com/user-attachments/assets/081dd6eb-66a6-4b2f-a72e-5cf112f22a55" />
----
+
 ## 🚀 Project Highlights
 
 ✅ Clean and well-structured transfer learning workflow  
@@ -159,14 +159,15 @@ Predict
 ✅ Dependencies managed via a virtual environment  
 ✅ Model deployment implemented using a Flask API  
 ✅ Fully containerized with Docker for reproducible deployment 
----
+
 ## 📌 Conclusion
 
 This project demonstrates how a well-structured deep learning pipeline, combined with transfer learning and proper validation, can achieve excellent performance—even on small datasets.
----
+
 ## 💬 Feedback
 
 Feedback or suggestions are welcome. Please feel free to reach out.
+
 
 
 
