@@ -117,12 +117,12 @@ pip install -r requirements.txt
 4. Test endpoints
 ```bash
 curl http://127.0.0.1:5000/health
-
+```
 5. Test prediction
 ```bash
 curl -X POST http://127.0.0.1:5000/predict \
      -F "file=@../data/fruits/test/Mango/134_100.jpg"
-
+```
 <img width="775" height="217" alt="image" src="https://github.com/user-attachments/assets/8d247cd1-4fa3-4885-8966-85d70983c568" />
 
 ## 🐳 Containerization (Docker)
@@ -132,20 +132,22 @@ The application is fully containerized for easy deployment.
 Build Docker Image
 ```bash
 docker build -t fruit-classifier .
-
+```
 Run Container
 ```bash
 docker run -p 5000:5000 fruit-classifier
-
+```
 Test
 ```bash
 curl http://127.0.0.1:5000/health
+```
 <img width="766" height="165" alt="image" src="https://github.com/user-attachments/assets/4f939a30-e19f-4e5c-982b-79946b3b596b" />
 
 Predict
 ```bash
 	curl -X POST http://127.0.0.1:5000/predict \
   -F "file=@../data/fruits/test/Orange/52_100.jpg"
+```
 <img width="763" height="217" alt="image" src="https://github.com/user-attachments/assets/081dd6eb-66a6-4b2f-a72e-5cf112f22a55" />
 
 ## 🚀 Project Highlights
@@ -166,5 +168,6 @@ This project demonstrates how a well-structured deep learning pipeline, combined
 ## 💬 Feedback
 
 Feedback or suggestions are welcome. Please feel free to reach out.
+
 
 
