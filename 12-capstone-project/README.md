@@ -105,17 +105,15 @@ The best-performing model is saved using model checkpoints. A manual test is per
 
 ## 📦 Environment Setup
 
-### 1. Create and Activate Virtual Environment
-
+1. Create and Activate Virtual Environment
 ```bash
 python -m venv venv
 source venv/bin/activate
-      
-
+```     
 3. Install Dependencies
 ```bash
 pip install -r requirements.txt
-
+```
 4. Test endpoints
 ```bash
 curl http://127.0.0.1:5000/health
@@ -168,4 +166,5 @@ This project demonstrates how a well-structured deep learning pipeline, combined
 ## 💬 Feedback
 
 Feedback or suggestions are welcome. Please feel free to reach out.
+
 
