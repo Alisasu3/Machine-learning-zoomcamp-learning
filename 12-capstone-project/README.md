@@ -1,10 +1,11 @@
 ## 🍎 Fruit Classifier – Deep Learning Image Classification Project
+---
 ## 📌 Problem Description
 
 The objective of this project is to develop an image classification system capable of accurately identifying different types of fruits from images using deep learning techniques.
 
 The project emphasizes simplicity, correctness, and reproducibility, while showcasing best practices in model training, validation, and deployment.
-
+---
 ## 📊 Dataset
 Source
 
@@ -28,7 +29,7 @@ To reduce computational cost and speed up experimentation, only 5 common fruit c
 🍓 Strawberry
 
 This reduced dataset still provides very clear visual patterns, making it suitable for transfer learning experiments.
-
+---
 ## 🔍 Exploratory Data Analysis (EDA)
 
 The exploratory data analysis focuses on understanding both the visual characteristics and the structural integrity of the image dataset. Key aspects examined include:
@@ -42,67 +43,65 @@ In addition, data integrity checks were conducted to ensure:
 - No overlap between training and validation datasets
 
 These checks confirm that the observed high model performance is attributable to the inherent simplicity and clarity of the dataset, rather than data leakage or methodological issues.
-
+---
 ## 🧠 Model Training
 
 All experiments and model training steps are implemented in the notebook:  
 [`fruits_classifier_xception.ipynb`](fruits_classifier_xception.ipynb)
 
-Key Training Steps
-1. Pre-trained Convolutional Neural Networks
+### Key Training Steps
+### 1. Pre-trained Convolutional Neural Networks
 
 Used pre-trained CNNs to leverage learned visual features
 
 Reduced training time and improved stability
 
-2. Transfer Learning
+### 2. Transfer Learning
 
 Base model weights loaded from ImageNet
 
 Final layers fine-tuned on the fruit dataset
 
-3. Learning Rate Tuning
+### 3. Learning Rate Tuning
 
 Multiple learning rates tested
 
 Best learning rate found: 0.01
 
-4. Inner Dense Layer Size
+### 4. Inner Dense Layer Size
 
 Tested different dense layer sizes
 
 Best size: 100
 
-5. Dropout Regularization
+### 5. Dropout Regularization
 
 Dropout values evaluated
 
 Best dropout: 0.0
 (Dataset is simple and does not require regularization)
 
-6. Data Augmentation
+### 6. Data Augmentation
 
 Applied to improve generalization
 
 Includes random flips, rotations, and shifts
 
-⚠️ Model Evaluation Notes
+## ⚠️ Model Evaluation Notes
 
 Because the Fruits-360 dataset is visually simple and well-separated, the model reaches:
 
 val_accuracy = 1.0 after epoch 1
 
-⚠️ Important:
-Instead of accuracy, val_loss is used as the main monitoring metric to:
+**Important:**  
+Instead of relying solely on accuracy, **`val_loss` is used as the primary monitoring metric** in order to:
+- Avoid misleading performance interpretations
+- Better capture model confidence and convergence stability
 
-Prevent misleading conclusions
+### 7.  Model Saving and Testing
 
-Better capture model confidence and stability
-
-7.  Model Saving and Testing
-
-The best-performing model is saved using model checkpoints. A manual test is performed using a randomly selected image from the test dataset, and the model correctly predicts the image as **"Mango"**.
-
+The best-performing model is saved using model checkpoints. A manual test is performed using a randomly selected image from the test dataset, and the model correctly predicts the image as "Mango".
+---
 ## 📦 Environment Setup
 
 1. Create and Activate Virtual Environment
@@ -110,21 +109,21 @@ The best-performing model is saved using model checkpoints. A manual test is per
 python -m venv venv
 source venv/bin/activate
 ```     
-3. Install Dependencies
+2. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
-4. Test endpoints
+3. Test endpoints
 ```bash
 curl http://127.0.0.1:5000/health
 ```
-5. Test prediction
+4. Test prediction
 ```bash
 curl -X POST http://127.0.0.1:5000/predict \
      -F "file=@../data/fruits/test/Mango/134_100.jpg"
 ```
 <img width="775" height="217" alt="image" src="https://github.com/user-attachments/assets/8d247cd1-4fa3-4885-8966-85d70983c568" />
-
+---
 ## 🐳 Containerization (Docker)
 
 The application is fully containerized for easy deployment.
@@ -149,7 +148,7 @@ Predict
   -F "file=@../data/fruits/test/Orange/52_100.jpg"
 ```
 <img width="763" height="217" alt="image" src="https://github.com/user-attachments/assets/081dd6eb-66a6-4b2f-a72e-5cf112f22a55" />
-
+---
 ## 🚀 Project Highlights
 
 ✅ Clean and well-structured transfer learning workflow  
@@ -160,14 +159,15 @@ Predict
 ✅ Dependencies managed via a virtual environment  
 ✅ Model deployment implemented using a Flask API  
 ✅ Fully containerized with Docker for reproducible deployment 
-
+---
 ## 📌 Conclusion
 
 This project demonstrates how a well-structured deep learning pipeline, combined with transfer learning and proper validation, can achieve excellent performance—even on small datasets.
-
+---
 ## 💬 Feedback
 
 Feedback or suggestions are welcome. Please feel free to reach out.
+
 
 
 
