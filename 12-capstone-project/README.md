@@ -1,17 +1,9 @@
 ## 🍎 Fruit Classifier – Deep Learning Image Classification Project
 ## 📌 Problem Description
 
-The goal of this project is to build an image classification system that can automatically identify different types of fruits from images.
+The objective of this project is to develop an image classification system capable of accurately identifying different types of fruits from images using deep learning techniques.
 
-This solution can be used in scenarios such as:
-
-Automated fruit recognition in retail or smart agriculture
-
-Educational demonstrations of computer vision and transfer learning
-
-A lightweight example of deploying deep learning models in containers
-
-The project focuses on simplicity, correctness, and reproducibility, while demonstrating best practices in deep learning model training, validation, and deployment.
+The project emphasizes simplicity, correctness, and reproducibility, while showcasing best practices in model training, validation, and deployment.
 
 ## 📊 Dataset
 Source
@@ -39,23 +31,17 @@ This reduced dataset still provides very clear visual patterns, making it suitab
 
 ## 🔍 Exploratory Data Analysis (EDA)
 
-The EDA focuses on understanding the visual and structural properties of the image data:
+The exploratory data analysis focuses on understanding both the visual characteristics and the structural integrity of the image dataset. Key aspects examined include:
+- Image dimensions and overall consistency
+- RGB color distribution across different fruit classes
+- Visual inspection of representative samples from each class
+- Verification that image labels correctly correspond to their visual content
 
-Image dimensions and consistency
+In addition, data integrity checks were conducted to ensure:
+- No duplicated images within the dataset
+- No overlap between training and validation datasets
 
-RGB color distribution across classes
-
-Visual inspection of sample images per class
-
-Confirmation that labels match image content
-
-Additional checks were performed to ensure:
-
-No duplicated images
-
-No overlap between training and validation sets
-
-This confirms that the high model accuracy is due to dataset simplicity, not data leakage or flawed methodology.
+These checks confirm that the observed high model performance is attributable to the inherent simplicity and clarity of the dataset, rather than data leakage or methodological issues.
 
 ## 🧠 Model Training
 
@@ -114,59 +100,53 @@ Prevent misleading conclusions
 
 Better capture model confidence and stability
 
-## ✅ Model Validation & Testing
+7.  Model Saving and Testing
 
-Explicit checks confirm:
-
-No duplicated samples
-
-No train/validation overlap
-
-High accuracy is purely due to dataset quality
-
-Final best model is saved and tested manually
-
-Manual Test Result
-
-A downloaded image from test folder was used, and the model correctly predicted:
-
-"Mango"
+The best-performing model is saved using model checkpoints. A manual test is performed using a randomly selected image from the test dataset, and the model correctly predicts the image as **"Mango"**.
 
 ## 📦 Environment Setup
 1. Create and Activate Virtual Environment
+```bash
 python -m venv venv
 source venv/bin/activate        
 
-2. Install Dependencies
+3. Install Dependencies
+```bash
 pip install -r requirements.txt
 
-Main dependencies include:
+4. Test endpoints
+```bash
+curl http://127.0.0.1:5000/health
 
-TensorFlow / Keras
+5. Test prediction
+```bash
+curl -X POST http://127.0.0.1:5000/predict \
+     -F "file=@../data/fruits/test/Mango/134_100.jpg"
 
-NumPy
-
-Pandas
-
-Pillow
-
-Flask (for serving)
-
-Gunicorn
+<img width="775" height="217" alt="image" src="https://github.com/user-attachments/assets/8d247cd1-4fa3-4885-8966-85d70983c568" />
 
 ## 🐳 Containerization (Docker)
 
 The application is fully containerized for easy deployment.
 
 Build Docker Image
+```bash
 docker build -t fruit-classifier .
 
 Run Container
-docker run -p 8080:8080 fruit-classifier
+```bash
+docker run -p 5000:5000 fruit-classifier
 
-Once running, the service will be available at:
+Test
+```bash
+curl http://127.0.0.1:5000/health
+<img width="766" height="165" alt="image" src="https://github.com/user-attachments/assets/4f939a30-e19f-4e5c-982b-79946b3b596b" />
 
-http://localhost:8080
+Predict
+```bash
+	curl -X POST http://127.0.0.1:5000/predict \
+  -F "file=@../data/fruits/test/Orange/52_100.jpg"
+<img width="763" height="217" alt="image" src="https://github.com/user-attachments/assets/081dd6eb-66a6-4b2f-a72e-5cf112f22a55" />
 
 ## 🚀 Project Highlights
 
@@ -186,4 +166,3 @@ This project demonstrates how a well-structured deep learning pipeline, combined
 ## 💬 Feedback
 
 Feedback or suggestions are welcome. Please feel free to reach out.
-
