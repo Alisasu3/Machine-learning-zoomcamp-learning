@@ -87,6 +87,10 @@ Applied to improve generalization
 
 Includes random flips, rotations, and shifts
 
+### 7.  Model Saving and Testing
+
+The best-performing model is saved using model checkpoints. A manual test is performed using a randomly selected image from the test dataset, and the model correctly predicts the image as "Mango".
+
 ## ⚠️ Model Evaluation Notes
 
 Because the Fruits-360 dataset is visually simple and well-separated, the model reaches:
@@ -94,13 +98,9 @@ Because the Fruits-360 dataset is visually simple and well-separated, the model 
 val_accuracy = 1.0 after epoch 1
 
 **Important:**  
-Instead of relying solely on accuracy, **`val_loss` is used as the primary monitoring metric** in order to:
+Instead of relying solely on accuracy, `val_loss` is used as the primary monitoring metric in order to:
 - Avoid misleading performance interpretations
 - Better capture model confidence and convergence stability
-
-### 7.  Model Saving and Testing
-
-The best-performing model is saved using model checkpoints. A manual test is performed using a randomly selected image from the test dataset, and the model correctly predicts the image as "Mango".
 
 ## 📦 Environment Setup
 
@@ -167,6 +167,7 @@ This project demonstrates how a well-structured deep learning pipeline, combined
 ## 💬 Feedback
 
 Feedback or suggestions are welcome. Please feel free to reach out.
+
 
 
 
